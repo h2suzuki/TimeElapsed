@@ -1,15 +1,12 @@
 # TimeElapsed
-The C++11 header file to provide a simple TIME_ELAPSED macros.
-It uses C++11 standard only (macro, lambda, chrono, string, and ostream).
-So it should be portable.
+The C++11 header file to provide a simple TIME_ELAPSED macros to measure the elapsed time of a code block.
 
+The code has been tested with VisualStudio 2013 on Windows7 and g++ 4.8.2 on CentOS7.
 
 
 ## 1. Header file
 
     TimeElapsed.hpp
-
-
 
 
 ## 2. Macro API
@@ -92,6 +89,13 @@ can be measured as the below:
 After the completion of cv::Scalar, **TIME_ELAPSED** will print the elapsed time.
 
 See main.cpp for the more examples.
+
+
+## 4. Porability
+
+The header file uses C++11 standard only: macro, lambda, chrono, string, and ostream.
+Thus the code should be portable.
+
 
 --------
 THIS IS THE END OF THE FILE.
