@@ -68,34 +68,51 @@ If defined, TIME_ELAPSED* macros will not measure the time nor generate any outp
 
 ## 3. Tutorial
 
-Basically you can insert the macro around the concerned code block.  For example, the following code block:
+Basically you can measure the elapsed time of the concerned code block by inserting TIME_ELAPSED macro around.
+
+For example, the following code block can be measured
 
 ```cpp
-  cv::SiftFeatureDetector detector(0.05,10.0);
-  cv::Scalar color(100,50,255);
+	double target = atan(1.0);
+
+	// Leibniz formula: qpi->PI/4
+	long long int d = 1;
+	double qpi = 1.0;
+	do {
+		d += 2; qpi -= 1.0 / d;
+		d += 2; qpi += 1.0 / d;
+	} while (qpi-target > EPSILON);
+	
+	std::cout << 4.0*qpi << std::endl;
 ```
 
-can be measured as the below:
+like this:
 
 ```cpp
-  TIME_ELAPSED(
-  
-  cv::SiftFeatureDetector detector(0.05,10.0);
-  cv::Scalar color(100,50,255);
-  
-  );
+	double target = atan(1.0);
+
+TIME_ELAPSED(
+	// Leibniz formula: qpi->PI/4
+	long long int d = 1;
+	double qpi = 1.0;
+	do {
+		d += 2; qpi -= 1.0 / d;
+		d += 2; qpi += 1.0 / d;
+	} while (qpi-target > EPSILON);
+);
+
+	std::cout << 4.0*qpi << std::endl;
 ```
 
-After the completion of cv::Scalar, **TIME_ELAPSED** will print the elapsed time.
+After the completion of do{...}while, **TIME_ELAPSED** will print the elapsed time.
 
-See main.cpp for the more examples.
+You can see more examples in main.cpp.
 
 
 ## 4. Porability
 
 The header file uses C++11 standard only: macro, lambda, chrono, string, and ostream.
-Thus the code should be portable.
-
+The code should be portable to any OS.
 
 --------
 THIS IS THE END OF THE FILE.
