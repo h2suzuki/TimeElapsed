@@ -7,18 +7,18 @@
 #include <string>
 
 #ifdef NO_TIME_ELAPSED_MEASUREMENT
-#  define	TIME_ELAPSED_N(n,body)					time_elapsed_impl_noop<n>([&]{body;})
-#  define	TIME_ELAPSED_EXP_N(n,body)				time_elapsed_impl_noop<n>([&]{body;})
-#  define	TIME_ELAPSED_MARKER_N(n,marker,body)	time_elapsed_impl_noop<n>([&]{body;})
+#  define	TIME_ELAPSED_N(n,...)					time_elapsed_impl_noop<n>([&]{__VA_ARGS__;})
+#  define	TIME_ELAPSED_EXP_N(n,...)				time_elapsed_impl_noop<n>([&]{__VA_ARGS__;})
+#  define	TIME_ELAPSED_MARKER_N(n,marker,...)		time_elapsed_impl_noop<n>([&]{__VA_ARGS__;})
 #else
-#  define	TIME_ELAPSED_N(n,body)					time_elapsed_impl1<n>([&]{body;},__FILE__,__LINE__)
-#  define	TIME_ELAPSED_EXP_N(n,body)				time_elapsed_impl2<n>([&]{body;},#body)
-#  define	TIME_ELAPSED_MARKER_N(n,marker,body)	time_elapsed_impl_core<n>([&]{body;},marker)
+#  define	TIME_ELAPSED_N(n,...)					time_elapsed_impl1<n>([&]{__VA_ARGS__;},__FILE__,__LINE__)
+#  define	TIME_ELAPSED_EXP_N(n,...)				time_elapsed_impl2<n>([&]{__VA_ARGS__;},#__VA_ARGS__)
+#  define	TIME_ELAPSED_MARKER_N(n,marker,...)		time_elapsed_impl_core<n>([&]{__VA_ARGS__;},marker)
 #endif
 
-#define	TIME_ELAPSED(body)							TIME_ELAPSED_N(1,body)
-#define	TIME_ELAPSED_EXP(body)						TIME_ELAPSED_EXP_N(1,body)
-#define	TIME_ELAPSED_MARKER(marker,body)			TIME_ELAPSED_MARKER_N(1,marker,body)
+#define	TIME_ELAPSED(...)							TIME_ELAPSED_N(1,__VA_ARGS__)
+#define	TIME_ELAPSED_EXP(...)						TIME_ELAPSED_EXP_N(1,__VA_ARGS__)
+#define	TIME_ELAPSED_MARKER(marker,...)				TIME_ELAPSED_MARKER_N(1,marker,__VA_ARGS__)
 
 #define	TIME_ELAPSED_HEADER							"ElapsedTime: "
 #define	TIME_ELAPSED_HEADER_WIDTH					48
