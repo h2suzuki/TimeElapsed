@@ -30,12 +30,12 @@ int main(void)
 	std::cout << "f = " << f << std::endl;
 
 
-	// 4. Can pass a code block: n can live only within (...)
+	// 4. Can pass a code block: m and n can live only within (...)
 	f = 1.0f;
 	TIME_ELAPSED(
 
-		int n = 3;
-		for (int i = 0; i < n; i++) {
+		int m = 3, n = 4;
+		for (int i = 0; i < m*n; i++) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			f++;
 		}
@@ -43,11 +43,11 @@ int main(void)
 	);
 	std::cout << "f = " << f << std::endl;
 
-	// 5. With repetitions: this code block runs three times
+	// 5. Repeating: this code block runs three times
 	TIME_ELAPSED_N(3,
 
-		int m = 2;
-		for (int i = 0; i < m; i++) {
+		int k = 2;
+		for (int i = 0; i < k; i++) {
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			f++;
 		}
